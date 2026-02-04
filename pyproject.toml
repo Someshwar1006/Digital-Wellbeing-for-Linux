@@ -55,7 +55,6 @@ Issues = "https://github.com/someshwar/zenscreen/issues"
 
 [project.scripts]
 zenscreen = "zenscreen.cli.main:cli"
-zenscreen-gtk = "zenscreen.gui.main:main"
 zenscreen-daemon = "zenscreen.daemon.service:main"
 
 [project.gui-scripts]
