@@ -1,4 +1,4 @@
-# 🧘 ZenScreen - Digital Wellbeing for Linux
+# 🧘 Digital Wellbeing for Linux (ZenScreen)
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![AUR](https://img.shields.io/aur/version/zenscreen)](https://aur.archlinux.org/packages/zenscreen)
@@ -57,7 +57,8 @@ makepkg -si
 
 ```bash
 # Clone the repository
-git clone https://github.com/someshwar/zenscreen.git
+# Clone the repository
+git clone https://github.com/Someshwar1006/Digital-Wellbeing-for-Linux.git
 cd zenscreen
 
 # Install dependencies (Arch Linux)
@@ -300,9 +301,9 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
 
 ## 📞 Support
 
-- 🐛 [Report a bug](https://github.com/someshwar/zenscreen/issues/new?template=bug_report.md)
-- 💡 [Request a feature](https://github.com/someshwar/zenscreen/issues/new?template=feature_request.md)
-- 💬 [Discussions](https://github.com/someshwar/zenscreen/discussions)
+- 🐛 [Report a bug](https://github.com/Someshwar1006/Digital-Wellbeing-for-Linux/issues/new?template=bug_report.md)
+- 💡 [Request a feature](https://github.com/Someshwar1006/Digital-Wellbeing-for-Linux/issues/new?template=feature_request.md)
+- 💬 [Discussions](https://github.com/Someshwar1006/Digital-Wellbeing-for-Linux/discussions)
 
 ---
 
