@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366F1"/>
+      <stop offset="100%" style="stop-color:#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="ring-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#22C55E"/>
+      <stop offset="100%" style="stop-color:#16A34A"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background Circle -->
+  <circle cx="64" cy="64" r="60" fill="url(#bg-gradient)"/>
+  
+  <!-- Inner shadow/glow -->
+  <circle cx="64" cy="64" r="56" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
+  
+  <!-- Progress Ring Background -->
+  <circle 
+    cx="64" cy="64" r="42" 
+    fill="none" 
+    stroke="rgba(255,255,255,0.2)" 
+    stroke-width="8"
+    stroke-linecap="round"
+  />
+  
+  <!-- Progress Ring (75% filled) -->
+  <circle 
+    cx="64" cy="64" r="42" 
+    fill="none" 
+    stroke="url(#ring-gradient)" 
+    stroke-width="8"
+    stroke-linecap="round"
+    stroke-dasharray="198 264"
+    transform="rotate(-90 64 64)"
+  />
+  
+  <!-- Clock/Timer icon in center -->
+  <g transform="translate(64, 64)">
+    <!-- Clock face -->
+    <circle cx="0" cy="0" r="20" fill="rgba(255,255,255,0.9)"/>
+    
+    <!-- Clock hands -->
+    <line x1="0" y1="0" x2="0" y2="-12" stroke="#6366F1" stroke-width="3" stroke-linecap="round"/>
+    <line x1="0" y1="0" x2="8" y2="0" stroke="#6366F1" stroke-width="2.5" stroke-linecap="round"/>
+    
+    <!-- Center dot -->
+    <circle cx="0" cy="0" r="2" fill="#6366F1"/>
+  </g>
+  
+  <!-- Decorative dots -->
+  <circle cx="104" cy="32" r="4" fill="rgba(255,255,255,0.5)"/>
+  <circle cx="96" cy="96" r="3" fill="rgba(255,255,255,0.3)"/>
+  <circle cx="24" cy="88" r="3" fill="rgba(255,255,255,0.4)"/>
+</svg>

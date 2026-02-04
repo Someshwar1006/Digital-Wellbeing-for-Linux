@@ -1,0 +1,14 @@
+[Desktop Entry]
+Name=ZenScreen
+GenericName=Digital Wellbeing
+Comment=Track screen time and build healthier digital habits
+Exec=zenscreen-gtk
+Icon=com.zenscreen.app
+Terminal=false
+Type=Application
+Categories=Utility;GTK;Monitor;
+Keywords=screen;time;focus;wellbeing;productivity;digital;health;tracking;
+StartupNotify=true
+StartupWMClass=com.zenscreen.app
+X-GNOME-SingleWindow=true
+X-GNOME-UsesNotifications=true
