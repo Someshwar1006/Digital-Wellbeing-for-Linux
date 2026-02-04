@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=ZenScreen Daemon
+Comment=Digital Wellbeing Tracker Background Service
+Exec=zenscreen-daemon
+Hidden=false
+NoDisplay=true
+X-GNOME-Autostart-enabled=true
+StartupNotify=false
