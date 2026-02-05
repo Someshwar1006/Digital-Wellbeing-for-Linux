@@ -550,6 +550,74 @@ class ZenScreenApp(Adw.Application):
         
         # Start update timer
         self._start_update_timer()
+        
+        # Check if systemd service is enabled/running
+        GLib.timeout_add(500, self._check_service_status, win)
+    
+    def _check_service_status(self, win):
+        """Check if the ZenScreen systemd service is enabled and running."""
+        import subprocess
+        
+        try:
+            # Check if service is enabled
+            enabled_result = subprocess.run(
+                ['systemctl', '--user', 'is-enabled', 'zenscreen.service'],
+                capture_output=True, text=True, timeout=5
+            )
+            is_enabled = enabled_result.returncode == 0
+            
+            # Check if service is active
+            active_result = subprocess.run(
+                ['systemctl', '--user', 'is-active', 'zenscreen.service'],
+                capture_output=True, text=True, timeout=5
+            )
+            is_active = active_result.returncode == 0
+            
+            if not is_enabled or not is_active:
+                self._show_service_enable_dialog(win)
+        except Exception as e:
+            print(f"Could not check service status: {e}")
+        
+        return False  # Don't repeat
+    
+    def _show_service_enable_dialog(self, win):
+        """Show a dialog prompting the user to enable the background service."""
+        dialog = Adw.MessageDialog(
+            transient_for=win,
+            heading="Enable Background Tracking?",
+            body="The ZenScreen background service is not running. Enable it to automatically track your screen time.\n\nThis will run the tracking daemon whenever you log in."
+        )
+        
+        dialog.add_response("cancel", "Not Now")
+        dialog.add_response("enable", "Enable Service")
+        dialog.set_response_appearance("enable", Adw.ResponseAppearance.SUGGESTED)
+        dialog.set_default_response("enable")
+        
+        dialog.connect("response", self._on_service_dialog_response)
+        dialog.present()
+    
+    def _on_service_dialog_response(self, dialog, response):
+        """Handle the service enable dialog response."""
+        if response == "enable":
+            import subprocess
+            try:
+                # Enable and start the service
+                result = subprocess.run(
+                    ['systemctl', '--user', 'enable', '--now', 'zenscreen.service'],
+                    capture_output=True, text=True, timeout=10
+                )
+                
+                if result.returncode == 0:
+                    # Show success toast
+                    win = self.props.active_window
+                    if win and hasattr(win, 'toast_overlay'):
+                        toast = Adw.Toast(title="✓ Background tracking enabled!")
+                        toast.set_timeout(3)
+                        win.toast_overlay.add_toast(toast)
+                else:
+                    print(f"Failed to enable service: {result.stderr}")
+            except Exception as e:
+                print(f"Error enabling service: {e}")
     
     def do_shutdown(self):
         """Called when the application shuts down."""
