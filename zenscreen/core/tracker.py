@@ -532,6 +532,10 @@ class Tracker:
         # Callbacks
         self._on_window_change: Optional[Callable[[WindowInfo], None]] = None
         self._on_idle_change: Optional[Callable[[bool], None]] = None
+        
+        # Suspend detection - if time between polls > 5 min, system was likely suspended
+        self._last_poll_time: Optional[float] = None
+        self._suspend_threshold = 300  # 5 minutes in seconds
     
     @property
     def is_running(self) -> bool:
@@ -594,6 +598,21 @@ class Tracker:
         """Main tracking loop."""
         while self._running:
             try:
+                current_time = time.time()
+                
+                # Detect suspend/sleep - if time gap is too large, close current session
+                if self._last_poll_time is not None:
+                    time_gap = current_time - self._last_poll_time
+                    if time_gap > self._suspend_threshold:
+                        logger.info(f"Detected suspend/sleep (gap: {time_gap:.0f}s), closing current session")
+                        if self._current_session_id and self._database:
+                            # Close the session at the time we last polled (before suspend)
+                            self._database.end_app_session(self._current_session_id)
+                            self._current_session_id = None
+                            self._current_window = None
+                
+                self._last_poll_time = current_time
+                
                 # Check idle state
                 idle_time = self.get_idle_time()
                 was_idle = self._is_idle
